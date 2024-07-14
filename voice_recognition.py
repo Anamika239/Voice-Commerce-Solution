@@ -40,14 +40,14 @@ class VoiceProcessor:
 if __name__ == "__main__":
     processor = VoiceProcessor()
     
-    # Get the language choice from the user
+
     language = processor.get_language_choice()
     print(f"Language selected: {language}")
 
-    # Pause briefly to ensure the system is ready
+    
     time.sleep(2)
 
-    # Recognize speech in the selected language
+    
     while True:
         print("Please speak now...")
         text = processor.recognize_speech(language=language)
