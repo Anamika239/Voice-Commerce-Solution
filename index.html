@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech Recognition</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            padding-top: 50px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.8); 
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 2.5rem;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        #result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Speech Recognition Demo</h1>
+        <button id="start-recognition">Start Recognition</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#start-recognition').click(function() {
+                $.ajax({
+                    url: 'http://localhost:5000/speech-to-text',
+                    type: 'POST',
+                    success: function(response) {
+                        if (response.keywords.length > 0) {
+                            $('#result').html('<p>Keywords: ' + response.keywords.join(', ') + '</p>');
+                        } else {
+                            $('#result').html('<p>No keywords found.</p>');
+                        }
+                    },
+                    error: function(error) {
+                        console.log(error);
+                        alert('Error occurred during recognition.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
