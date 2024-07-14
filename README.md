@@ -13,3 +13,6 @@ Flask
 Flask-CORS
 SpeechRecognition
 nltk
+
+# Transaction
+still under work to implement cryptographic measures for encryption.
